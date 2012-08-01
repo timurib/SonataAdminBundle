@@ -14,7 +14,11 @@ file that was distributed with this source code.
 {% block actions %}
     <div class="sonata-actions">
         {% if admin.hasRoute('edit') and admin.isGranted('EDIT', object)%}
-            <a class="btn sonata-action-element" href="{{ admin.generateObjectUrl('edit', object) }}">{% trans from 'SonataAdminBundle' %}link_action_edit{% endtrans %}</a>
+            <a class="btn sonata-action-element" href="{{ admin.generateObjectUrl('edit', object) }}">
+            {% filter e %}
+            {% trans with {'%name%': admin.toString(object)} from 'SonataAdminBundle' %}link_action_edit{% endtrans %}
+            {% endfilter %}
+            </a>
         {% endif %}
 
         {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
@@ -41,7 +45,11 @@ file that was distributed with this source code.
                 {% if admin.hasRoute('edit') and admin.isGranted('EDIT', object) %}
                     {% trans from 'SonataAdminBundle' %}delete_or{% endtrans %}
 
-                    <a class="btn btn-success" href="{{ admin.generateObjectUrl('edit', object) }}">{% trans from 'SonataAdminBundle' %}link_action_edit{% endtrans %}</a>
+                    <a class="btn btn-success" href="{{ admin.generateObjectUrl('edit', object) }}">
+                    {% filter e %}
+                    {% trans with {'%name%': admin.toString(object)} from 'SonataAdminBundle' %}link_action_edit{% endtrans %}
+                    {% endfilter %}
+                    </a>
                 {% endif %}
             </form>
         </div>
